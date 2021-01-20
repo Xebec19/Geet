@@ -1,14 +1,40 @@
 import React,{Component} from 'react';
-import './App.css';
+import { auth,db } from './config/firebase';
 
-class App extends Component {
-  render(){
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  );  //return ends here
-  }  //render ends here
-}  //class ends here
+class App extends Component{
+constructor(){
+super();
+this.state={
+authenticated: false,
+loading: true
+}  //state ends here
+}  //constructor ends here
+componentDidMount(){
+auth().onAuthStateChanged((user) => {
+if(user){
+this.setState({
+authenticated:true,
+loading:false
+});
+}else{
+this.setState({
+authenticated:false,
+loading:false
+});
+}
+})
+}
+
+render(){
+if(this.state.loading)return <h1>Loading</h1>;
+else{
+return(
+<div>
+{(this.state.autheticated)?<Signin />:<Chat />}
+</div>
+)  //return ends here
+}  //return ends here
+}
+}  //App ends here
 
 export default App;
