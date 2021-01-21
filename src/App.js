@@ -10,17 +10,27 @@ import {
 /*import { auth,db } from './config/firebase';*/
 
 class App extends Component{
-
+constructor(){
+	super();
+	this.state = {
+		authenticated:false
+	}
+	this.setAuth = this.setAuth.bind(this);
+}
+setAuth(props){
+	this.setState({authenticated:props})
+	console.log('change in state',this.state.authenticated);
+}
 render(){
 return(
 <div>
     <Router>
 <Switch>
           <Route exact path="/">
-            <Signin />
+            <Signin auth={this.state.authenticated} setAuth={this.setAuth}/>
           </Route>
           <Route path="/chat">
-            <Chat />
+            <Chat auth={this.state.authenticated}/>
           </Route>
         </Switch>
     </Router>

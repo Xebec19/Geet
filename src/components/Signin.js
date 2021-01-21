@@ -1,9 +1,11 @@
 import React from 'react';
+import firebase from 'firebase';
+import 'firebase/auth';
 
 class Signin extends React.Component{
 	
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state={
 		authenticated: false,
 		loading: true
@@ -12,12 +14,13 @@ class Signin extends React.Component{
 		}  //constructor ends here
 
 		componentDidMount(){
-		auth().onAuthStateChanged((user) => {
+		firebase.auth().onAuthStateChanged((user) => {
 		if(user){
 		this.setState({
 		authenticated:true,
 		loading:false
 		});
+		this.props.setAuth(true)
 		}else{
 		this.setState({
 		authenticated:false,
@@ -28,13 +31,13 @@ class Signin extends React.Component{
 		}  //componentDidMount ends here
 
 		signInWithGoogle() {
-			const provider = new auth.GoogleAuthProvider();
-			return auth().signInWithPopup(provider);
+			const provider = new firebase.auth().GoogleAuthProvider();
+			return firebase.auth().signInWithPopup(provider);
 		  }
 	render(){
 		return(
 			<div>
-				<button onClick={() => this.signInWithGoogle()}>Sign In</button>
+			<button onClick={() => this.signInWithGoogle}>Sign in</button>
 			</div>
 			)
 	}
