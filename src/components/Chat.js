@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatList from './ChatList';
-import firebaseDb from '../config/firebase';
+import 'firebase/storage';
+import {db} from '../config/firebase';
 class Chat extends React.Component{
 constructor(props){
 super(props);
@@ -17,7 +18,7 @@ this.setState({[e.target.name]: e.target.value});
 }  //handleChange ends here
 
 handleSubmit(){
-firebaseDb.child('messages').push(
+db.child('messages').push(
 this.state.message,
 err => {
 if(err)console.log(err)
@@ -30,14 +31,20 @@ render(){
 	if(this.props.auth){
 return(
 <div>
+	<button onClick={() => {console.log('Sign me out!')}}>Sign out</button>
 <ChatList />
 <input type='text' name='message' value={this.state.message} onChange={(e) => this.handleChange(e)} />
-<button onClick={() => this.handleSubmit()}>Submit</button>
+<button onClick={() => this.handleSubmit()} >Submit</button>
 </div>
 )
 }
 else{
-	return (<h1>Access Denied</h1>)
+	return (
+		<div>
+		<h1>Access Denied</h1>
+		{console.log(this.props.auth)}
+		</div>
+		)
 }
 }
 }

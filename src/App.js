@@ -30,7 +30,7 @@ return(
             <Signin auth={this.state.authenticated} setAuth={this.setAuth}/>
           </Route>
           <Route path="/chat">
-            <Chat auth={this.state.authenticated}/>
+            <Chat auth={this.state.authenticated} />
           </Route>
         </Switch>
     </Router>

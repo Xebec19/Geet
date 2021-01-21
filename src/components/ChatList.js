@@ -1,5 +1,6 @@
 import React from 'react';
-import firebaseDb from '../config/firebase'
+import 'firebase/storage';
+import {db} from '../config/firebase';
 class ChatList extends React.Component{
 constructor(){
 super();
@@ -10,7 +11,7 @@ loading:true
 }  //constructor ends here
 
 componentDidMount(){
-firebaseDb.child('messages').on('value',snapshot => {
+db.child('messages').on('value',snapshot => {
 if(snapshot.val()!=null){
 let temp = []
 /*this.setState({data: ...snapshot.val()});*/
