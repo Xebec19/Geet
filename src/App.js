@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Chat from './components/Chat';
-import Signin from './components/Signin';
+import Signup from './components/Signup';
 import {
     BrowserRouter as Router,
     Switch,
@@ -27,7 +27,7 @@ return(
     <Router>
 <Switch>
           <Route exact path="/">
-            <Signin auth={this.state.authenticated} setAuth={this.setAuth}/>
+            <Signup auth={this.state.authenticated} setAuth={this.setAuth}/>
           </Route>
           <Route path="/chat">
             <Chat auth={this.state.authenticated} />
