@@ -33,7 +33,12 @@ return(
 <div>
 	<button onClick={() => {console.log('Sign me out!')}}>Sign out</button>
 <ChatList />
-<input type='text' name='message' value={this.state.message} onChange={(e) => this.handleChange(e)} />
+<input 
+type='text' 
+name='message' 
+value={this.state.message} 
+onChange={(e) => this.handleChange(e)} 
+/>
 <button onClick={() => this.handleSubmit()} >Submit</button>
 </div>
 )
