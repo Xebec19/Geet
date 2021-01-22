@@ -49,7 +49,7 @@ this.setState({[e.target.name]: e.target.value});
 handleSubmit(){
 db.child('messages').push({
 content: this.state.message,
-uid: this.state.uid
+email: this.state.email
 },
 err => {
 if(err)console.log(err)
