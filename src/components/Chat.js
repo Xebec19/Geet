@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import ChatList from './ChatList';
 import {auth,db} from '../config/firebase';
 class Chat extends React.Component{
@@ -8,7 +8,10 @@ super(props);
 this.state = {
 message: '',
 data:[],
-loading:true
+email:'',
+uid:'',
+loading:true,
+authenticated:false
 }
 this.handleChange = this.handleChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +22,10 @@ componentDidMount(){
 	auth.onAuthStateChanged((user) => {
 		if(user){
 			var uid = user.uid;
+			this.setState({uid:uid})
 			console.log('Logged in');
+			this.setState({email:user.email})
+			this.setState({authenticated:true});
 		}else{
 			console.log('Logged out');
 			<Redirect to="/" />
@@ -30,6 +36,7 @@ componentDidMount(){
 handleSignout(){
 	auth.signOut().then(() => {
 		console.log('Success');
+		this.setState({authenticated:false})
 	}).catch((error) => {
 		console.log('error')
 	})
@@ -40,8 +47,10 @@ this.setState({[e.target.name]: e.target.value});
 }  //handleChange ends here
 
 handleSubmit(){
-db.child('messages').push(
-this.state.message,
+db.child('messages').push({
+content: this.state.message,
+uid: this.state.uid
+},
 err => {
 if(err)console.log(err)
 }
@@ -50,7 +59,7 @@ this.setState({message:''})
 }  //handleSubmit ends here
 
 render(){
-return(
+if(this.state.authenticated){return(
 <div>
 	<button onClick={() => this.handleSignout()}>Sign out</button>
 <ChatList />
@@ -63,6 +72,16 @@ onChange={(e) => this.handleChange(e)}
 <button onClick={() => this.handleSubmit()} >Submit</button>
 </div>
 ) //return ends here
+}else{
+	return (
+	<div>
+		<h1>Unknown User</h1>
+		<br/>
+		<Link to='/'>Sign in</Link>
+	</div>
+	
+	)
+}
 }
 }
 

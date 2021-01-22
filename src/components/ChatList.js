@@ -5,7 +5,7 @@ class ChatList extends React.Component{
 constructor(){
 super();
 this.state = {
-data:[],
+data:{},
 loading:true
 }
 }  //constructor ends here
@@ -16,6 +16,7 @@ if(snapshot.val()!=null){
 let temp = []
 /*this.setState({data: ...snapshot.val()});*/
 snapshot.forEach((item) => {
+	console.log('Check it out',item.val())
 temp.push(item.node_.value_);
 })
 this.setState({data:temp})
@@ -32,6 +33,7 @@ return(
 <div>
 <div>
 <pre>
+	{console.log(this.state.data)}
 {this.state.data.map((item,index) => {
 return <p key={index}>{item}</p>
 })}

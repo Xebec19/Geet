@@ -23,7 +23,8 @@ function handleSubmit(props){
 	else{
 		auth.signInWithEmailAndPassword(email,password).then((userCredential) => {
 			var user = userCredential.user;
-			console.log(user);
+            console.log(user);
+            console.log(userCredential.user.email);
 			setError(null);
 		})
 		.catch((error) => {
