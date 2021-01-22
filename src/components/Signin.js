@@ -1,4 +1,7 @@
 import React,{useState} from 'react';
+import {
+    Link
+  } from "react-router-dom";
 import {auth} from '../config/firebase';
 
 const Signin = (props) => {
@@ -29,6 +32,7 @@ function handleSubmit(props){
 		})
 		.catch((error) => {
 			setError(error.message);
+			console.log(error.message);
 		})
 		
 
@@ -80,12 +84,21 @@ return(
 {/*Submit button*/}
 <tr>
 <td>
-	<button
-	type='submit'
+	<Link
 	onClick={() => handleSubmit()}
+	to='/chat'
 	>
 	Submit
-	</button>
+	</Link>
+</td>
+</tr>
+<tr>
+<td>
+	<Link
+	to='/signup'
+	>
+	Need an account?
+	</Link>
 </td>
 </tr>
 {/*Submit button ends here*/}

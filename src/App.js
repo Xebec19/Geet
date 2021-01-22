@@ -17,12 +17,12 @@ constructor(){
 	this.state = {
 	user:{}
 	}
-	this.signup = this.signup.bind(this);
+	this.handleRoute = this.handleRoute.bind(this);
 }
 
-signup = (props) => {
-	const {email,password} = props;
-	console.log(`Successfully entered signup func value of email ${email} and password ${password}`)
+handleRoute(){
+	/*const {email,password} = props;*/
+	console.log(`Successfully entered signup func `)
 }
 
 render(){
@@ -31,15 +31,15 @@ return(
     <Router>
 <Switch>
           <Route path="/signup">
-            <Signup signup={this.signup}/>
+            <Signup handleRoute={this.handleRoute}/>
           </Route>
           
           <Route exact path="/">
-            <Signin/>
+            <Signin handleRoute={this.handleRoute}/>
           </Route>
 
           <Route path="/chat">
-            <Chat />
+            <Chat handleRoute={this.handleRoute}/>
           </Route>
         </Switch>
     </Router>
