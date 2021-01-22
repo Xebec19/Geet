@@ -5,7 +5,7 @@ import {auth,db} from '../config/firebase';
 class Chat extends React.Component{
 constructor(props){
 super(props);
-this.state = {
+this.state                     = {
 message: '',
 data:[],
 email:'',
@@ -13,33 +13,33 @@ uid:'',
 loading:true,
 authenticated:false
 }
-this.handleChange = this.handleChange.bind(this);
-this.handleSubmit = this.handleSubmit.bind(this);
-this.handleSignout = this.handleSignout.bind(this);
+this.handleChange              = this.handleChange.bind(this);
+this.handleSubmit              = this.handleSubmit.bind(this);
+this.handleSignout             = this.handleSignout.bind(this);
 }  //constructor ends here
 
 componentDidMount(){
-	auth.onAuthStateChanged((user) => {
-		if(user){
-			var uid = user.uid;
-			this.setState({uid:uid})
-			console.log('Logged in');
-			this.setState({email:user.email})
-			this.setState({authenticated:true});
-		}else{
-			console.log('Logged out');
-			<Redirect to="/" />
-		}
-	})
+auth.onAuthStateChanged((user) => {
+if(user){
+var uid                        = user.uid;
+this.setState({uid:uid})
+console.log('Logged in');
+this.setState({email:user.email})
+this.setState({authenticated:true});
+}else{
+console.log('Logged out');
+<Redirect to                   ="/" />
+}
+})
 }
 
 handleSignout(){
-	auth.signOut().then(() => {
-		console.log('Success');
-		this.setState({authenticated:false})
-	}).catch((error) => {
-		console.log('error')
-	})
+auth.signOut().then(()         => {
+console.log('Success');
+this.setState({authenticated:false})
+}).catch((error)               => {
+console.log('error')
+})
 }
 
 handleChange(e){
@@ -51,7 +51,7 @@ db.child('messages').push({
 content: this.state.message,
 email: this.state.email
 },
-err => {
+err                            => {
 if(err)console.log(err)
 }
 )
@@ -61,26 +61,26 @@ this.setState({message:''})
 render(){
 if(this.state.authenticated){return(
 <div>
-	<button onClick={() => this.handleSignout()}>Sign out</button>
+<button onClick                ={() => this.handleSignout()}>Sign out</button>
 <ChatList />
 <input 
-type='text' 
-name='message' 
-value={this.state.message} 
-onChange={(e) => this.handleChange(e)} 
+type                           ='text' 
+name                           ='message' 
+value                          ={this.state.message} 
+onChange                       ={(e) => this.handleChange(e)} 
 />
-<button onClick={() => this.handleSubmit()} >Submit</button>
+<button onClick                ={() => this.handleSubmit()} >Submit</button>
 </div>
 ) //return ends here
 }else{
-	return (
-	<div>
-		<h1>Unknown User</h1>
-		<br/>
-		<Link to='/'>Sign in</Link>
-	</div>
-	
-	)
+return (
+<div>
+<h1>Unknown User</h1>
+<br/>
+<Link to                       ='/'>Sign in</Link>
+</div>
+
+)
 }
 }
 }
