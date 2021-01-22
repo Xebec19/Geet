@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
 import Chat from './components/Chat';
+import Signup from './components/Signup';
 import Signin from './components/Signin';
+import {auth} from './config/firebase';
+import 'firebase/auth';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
   } from "react-router-dom";
 /*import { auth,db } from './config/firebase';*/
 
@@ -13,24 +15,31 @@ class App extends Component{
 constructor(){
 	super();
 	this.state = {
-		authenticated:false
+	user:{}
 	}
-	this.setAuth = this.setAuth.bind(this);
+	this.signup = this.signup.bind(this);
 }
-setAuth(props){
-	this.setState({authenticated:props})
-	console.log('change in state',this.state.authenticated);
+
+signup = (props) => {
+	const {email,password} = props;
+	console.log(`Successfully entered signup func value of email ${email} and password ${password}`)
 }
+
 render(){
 return(
 <div>
     <Router>
 <Switch>
-          <Route exact path="/">
-            <Signin auth={this.state.authenticated} setAuth={this.setAuth}/>
+          <Route path="/signup">
+            <Signup signup={this.signup}/>
           </Route>
+          
+          <Route exact path="/">
+            <Signin/>
+          </Route>
+
           <Route path="/chat">
-            <Chat auth={this.state.authenticated} />
+            <Chat />
           </Route>
         </Switch>
     </Router>

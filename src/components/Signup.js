@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {auth} from '../config/firebase';
 
-const Signin = (props) => {
+const Signup = (props) => {
 
 const [email,setEmail] = useState('');
 const [password,setPassword] = useState('');
@@ -21,7 +21,7 @@ function handleSubmit(props){
 		return 0;
 		} 
 	else{
-		auth.signInWithEmailAndPassword(email,password).then((userCredential) => {
+		auth.createUserWithEmailAndPassword(email,password).then((userCredential) => {
 			var user = userCredential.user;
 			console.log(user);
 			setError(null);
@@ -93,4 +93,4 @@ return(
 
 )
 }
-export default Signin;
+export default Signup;

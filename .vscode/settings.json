@@ -1,0 +1,7 @@
+{
+    "editor.cursorBlinking": "smooth",
+    "editor.fontFamily": " 'hack', monospace, 'Droid Sans Fallback'",
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.wordWrap": "on"
+}

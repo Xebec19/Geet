@@ -1,7 +1,7 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import ChatList from './ChatList';
-import 'firebase/storage';
-import {db} from '../config/firebase';
+import {auth,db} from '../config/firebase';
 class Chat extends React.Component{
 constructor(props){
 super(props);
@@ -12,7 +12,29 @@ loading:true
 }
 this.handleChange = this.handleChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
+this.handleSignout = this.handleSignout.bind(this);
 }  //constructor ends here
+
+componentDidMount(){
+	auth.onAuthStateChanged((user) => {
+		if(user){
+			var uid = user.uid;
+			console.log('Logged in');
+		}else{
+			console.log('Logged out');
+			<Redirect to="/" />
+		}
+	})
+}
+
+handleSignout(){
+	auth.signOut().then(() => {
+		console.log('Success');
+	}).catch((error) => {
+		console.log('error')
+	})
+}
+
 handleChange(e){
 this.setState({[e.target.name]: e.target.value});
 }  //handleChange ends here
@@ -28,10 +50,9 @@ this.setState({message:''})
 }  //handleSubmit ends here
 
 render(){
-	if(this.props.auth){
 return(
 <div>
-	<button onClick={() => {console.log('Sign me out!')}}>Sign out</button>
+	<button onClick={() => this.handleSignout()}>Sign out</button>
 <ChatList />
 <input 
 type='text' 
@@ -41,16 +62,7 @@ onChange={(e) => this.handleChange(e)}
 />
 <button onClick={() => this.handleSubmit()} >Submit</button>
 </div>
-)
-}
-else{
-	return (
-		<div>
-		<h1>Access Denied</h1>
-		{console.log(this.props.auth)}
-		</div>
-		)
-}
+) //return ends here
 }
 }
 
