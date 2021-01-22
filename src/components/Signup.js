@@ -1,4 +1,7 @@
 import React,{useState} from 'react';
+import {
+    Link
+  } from "react-router-dom";
 import {auth} from '../config/firebase';
 
 const Signup                                                              = (props) => {
@@ -8,7 +11,7 @@ const [password,setPassword]                                              = useS
 const [error,setError]                                                    = useState(null);
 
 function valdEmail(){
-if(/^[a-zA-Z0-9.!#$%&'*+                                                  /=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
+if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
 {
 return (true)
 }
@@ -16,7 +19,7 @@ return (false)
 }
 
 function handleSubmit(props){
-if(email                                                                  ==='' || password==='' || !valdEmail()){ 
+if(email === '' || password === '' || !valdEmail()){ 
 setError('Invalid credentials');
 return 0;
 } 
@@ -79,15 +82,27 @@ required
 {/*Submit button*/}
 <tr>
 <td>
-<button
-type                                                                      ='submit'
+<Link
 onClick                                                                   ={() => handleSubmit()}
+to='/chat'                         
 >
 Submit
-</button>
+</Link>
 </td>
 </tr>
 {/*Submit button ends here*/}
+
+<tr>
+<td>
+<Link
+onClick                                                                   ={() => handleSubmit()}
+to='/'                         
+>
+Already have an account?
+</Link>
+</td>
+</tr>
+
 </tbody>
 </table>
 

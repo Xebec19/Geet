@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link,Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ChatList from './ChatList';
 import {auth,db} from '../config/firebase';
 class Chat extends React.Component{
@@ -28,7 +28,6 @@ this.setState({email:user.email})
 this.setState({authenticated:true});
 }else{
 console.log('Logged out');
-<Redirect to                   ="/" />
 }
 })
 }
@@ -61,7 +60,11 @@ this.setState({message:''})
 render(){
 if(this.state.authenticated){return(
 <div>
-<button onClick                ={() => this.handleSignout()}>Sign out</button>
+<Link
+to='/' 
+onClick                ={() => this.handleSignout()}>
+Sign out
+</Link>
 <ChatList />
 <input 
 type                           ='text' 
