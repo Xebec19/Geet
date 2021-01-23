@@ -30,7 +30,7 @@ return(
 <div>
     <Router>
 <Switch>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <Signup/>
           </Route>
           
@@ -38,7 +38,7 @@ return(
             <Signin/>
           </Route>
 
-          <Route path="/chat">
+          <Route exact path="/chat">
             <Chat/>
           </Route>
         </Switch>
