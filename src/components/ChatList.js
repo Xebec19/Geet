@@ -1,6 +1,9 @@
 import React from 'react';
-import 'firebase/storage';
+import Spinner from './Spinner';
+import 'firebase/database';
 import {db} from '../config/firebase';
+import 'tachyons';
+
 class ChatList extends React.Component{
 constructor(){
 super();
@@ -14,14 +17,12 @@ componentDidMount(){
 db.child('messages').on('value',snapshot => {
 if(snapshot.val()                        !=null){
 let temp                                 = [];
-let count                                = 0;
 /*this.setState({data: ...snapshot.val()});*/
 snapshot.forEach((item)                  => {
-console.log('Check it out',item.val())
 temp.push(item.val())
 })
 /*this.setState({data:temp})*/
-console.log('Values',temp);
+
 this.setState({data:temp});
 this.setState({loading:false});
 }
@@ -30,15 +31,15 @@ this.setState({loading:false});
 
 render(){
 if(this.state.loading){
-return (<h1>Loading...</h1>)
+return <Spinner />
 }else{
 return(
 <div>
 <div style={{overFlow:'auto',wordBreak:'breakAll'}}>
-<pre>
-{console.log(this.state.data)}
+<pre style={{margin:'0',padding:'0'}}>
+
 {this.state.data.map((item,index)        => {
-return <p key={index}>{item.email} : {item.content}<hr/></p>
+return <span className='' key={index}>{item.email} :<br/> {item.content}<br/></span>
 })}
 </pre>
 </div>

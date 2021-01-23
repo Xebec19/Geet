@@ -31,15 +31,15 @@ return(
     <Router>
 <Switch>
           <Route path="/signup">
-            <Signup handleRoute={this.handleRoute}/>
+            <Signup/>
           </Route>
           
           <Route exact path="/">
-            <Signin handleRoute={this.handleRoute}/>
+            <Signin/>
           </Route>
 
           <Route path="/chat">
-            <Chat handleRoute={this.handleRoute}/>
+            <Chat/>
           </Route>
         </Switch>
     </Router>
