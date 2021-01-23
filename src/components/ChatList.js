@@ -34,11 +34,11 @@ return (<h1>Loading...</h1>)
 }else{
 return(
 <div>
-<div>
+<div style={{overFlow:'auto',wordBreak:'breakAll'}}>
 <pre>
 {console.log(this.state.data)}
 {this.state.data.map((item,index)        => {
-return <p key                            ={index}>{item.email} : {item.content}<hr/></p>
+return <p key={index}>{item.email} : {item.content}<hr/></p>
 })}
 </pre>
 </div>
