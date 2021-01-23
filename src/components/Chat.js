@@ -27,7 +27,6 @@ auth.onAuthStateChanged((user) => {
 if(user){
 var uid = user.uid;
 this.setState({uid:uid})
-console.log('Logged in');
 this.setState({email:user.email})
 }else{
 console.log('Logged out');
@@ -62,7 +61,7 @@ this.setState({message:''})
 }  //handleSubmit ends here
 
 render(){
-if(this.state.authenticated){return(
+	return(
 <div>
 <article className="vh-100 dt w-100">
 <div className="dtc v-mid tc ph3 ph4-l">
@@ -99,15 +98,6 @@ Submit
 </article>
 </div>
 ) //return ends here
-}else{
-return (
-<div>
-<Spinner />
-
-</div>
-
-)
-}
 }
 }
 
