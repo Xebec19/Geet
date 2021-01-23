@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import ChatList from './ChatList';
 import {auth,db} from '../config/firebase';
+import 'tachyons';
+
 class Chat extends React.Component{
 constructor(props){
 super(props);
@@ -60,22 +62,39 @@ this.setState({message:''})
 render(){
 if(this.state.authenticated){return(
 <div>
+<article class="vh-100 dt w-100">
+  <div class="dtc v-mid tc ph3 ph4-l">
 <Link
+class="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib black"
 to='/' 
 onClick                ={() => this.handleSignout()}>
 Sign out
 </Link>
 <ChatList />
-<input 
+
+<div class="pa4-l">
+  <form class="bg-light-red mw7 center pa4 br2-ns ba b--black-10">
+    <fieldset class="cf bn ma0 pa0">
+      <legend class="pa0 f5 f4-ns mb3 black-80">Write your message</legend>
+      <div class="cf">
+      <input 
 type                           ='text' 
 name                           ='message' 
 value                          ={this.state.message} 
 onChange                       ={(e) => this.handleChange(e)} 
 />
 <button 
+class="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib black"
 onClick                ={() => this.handleSubmit()} >
 Submit
-</button>
+</button>  
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+</div>
+</article>
 </div>
 ) //return ends here
 }else{
@@ -83,7 +102,10 @@ return (
 <div>
 <h1>Unknown User</h1>
 <br/>
-<Link to                       ='/'>Sign in</Link>
+<Link to                       ='/'>
+Sign in
+</Link>
+
 </div>
 
 )
