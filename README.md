@@ -9,4 +9,4 @@ How to run?
 3. write your firebase config by making a folder config => firebase.js in src
 4. write yarn start
 
-!Work in progress
+http://geet-chat.herokuapp.com/
