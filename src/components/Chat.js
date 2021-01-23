@@ -72,7 +72,10 @@ name                           ='message'
 value                          ={this.state.message} 
 onChange                       ={(e) => this.handleChange(e)} 
 />
-<button onClick                ={() => this.handleSubmit()} >Submit</button>
+<button 
+onClick                ={() => this.handleSubmit()} >
+Submit
+</button>
 </div>
 ) //return ends here
 }else{
